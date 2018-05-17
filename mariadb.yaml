@@ -1,0 +1,15 @@
+pod:
+  replicas:
+    server: 3
+volume:
+  enabled: true
+  class_name: ceph
+  size: 5Gi
+monitoring:
+  prometheus:
+    enabled: false
+    mysqld_exporter:
+      scrape: true
+network:
+  prometheus_mysql_exporter:
+    port: 9104

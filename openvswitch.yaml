@@ -1,0 +1,5 @@
+network:
+  external_bridge: br-ex
+  interface:
+    external: ens33
+  auto_bridge_add: {}

@@ -1,0 +1,54 @@
+pod:
+  replicas:
+    server: 3
+#  user:
+#    neutron:
+#      uid: 42435
+network:
+  backend:
+    - linuxbridge
+  share_namespaces: false
+  interface:
+    tunnel: ens33
+conf:
+  neutron_sudoers: |
+    # This sudoers file supports rootwrap-daemon for both Kolla and LOCI Images.
+    Defaults !requiretty
+    Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/var/lib/openstack/bin:/var/lib/kolla/venv/bin"
+    neutron ALL = (root) NOPASSWD: /var/lib/kolla/venv/bin/neutron-rootwrap /etc/neutron/rootwrap.conf *, /var/lib/openstack/bin/neutron-rootwrap /etc/neutron/rootwrap.conf *, /var/lib/kolla/venv/bin/neutron-rootwrap-daemon /etc/neutron/rootwrap.conf, /var/lib/openstack/bin/neutron-rootwrap-daemon /etc/neutron/rootwrap.conf
+  neutron:
+    DEFAULT:
+      debug: True
+      core_plugin: ml2
+      l3_ha: false
+      # NOTE: change mtu to 9000 if jumbo frame is supported
+      global_physnet_mtu: 1500
+      service_plugins: router
+      #(NOTE)portdirect: if unset this is populated dyanmicly from the value in
+      # 'network.backend' to sane defaults.
+      interface_driver: null
+    agent:
+#      root_helper: sudo /var/lib/openstack/bin/neutron-rootwrap /etc/neutron/rootwrap.conf
+      root_helper_daemon: sudo neutron-rootwrap-daemon /etc/neutron/rootwrap.conf
+  plugins:
+    ml2_conf:
+      ml2:
+        #(NOTE)portdirect: if unset this is populated dyanmicly from the value
+        # in 'network.backend' to sane defaults.
+        mechanism_drivers: null
+        type_drivers: flat, vlan, vxlan
+        tenant_network_types: vxlan
+    linuxbridge_agent:
+      linux_bridge:
+        # To define Flat and VLAN connections, in LB we can assign
+        # specific interface to the flat/vlan network name using:
+        # physical_interface_mappings: "external:eth3"
+        # Or we can set the mapping between the network and bridge:
+        #bridge_mappings: "external:br-ex"
+        bridge_mappings: "external:ens33"
+        # The two above options are exclusive, do not use both of them at once
+      securitygroup:
+        firewall_driver: iptables
+      vxlan:
+        l2_population: True
+        arp_responder: True

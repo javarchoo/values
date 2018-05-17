@@ -1,0 +1,3 @@
+pod:
+  replicas:
+    etcd: 1

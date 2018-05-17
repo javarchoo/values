@@ -1,0 +1,12 @@
+pod:
+  replicas:
+    server: 3
+volume:
+  enabled: true
+  size: 256Mi
+  class_name: ceph
+monitoring:
+  prometheus:
+    enabled: true
+    rabbitmq_exporter:
+      scrape: true

@@ -1,0 +1,9 @@
+network:
+  host_namespace: true
+  external_policy_local: false
+config:
+  worker-processes: "8"
+pod:
+  replicas:
+    ingress: 1
+    error_page: 1

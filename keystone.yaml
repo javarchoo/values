@@ -1,0 +1,7 @@
+conf:
+  keystone:
+    DEFAULT:
+      debug: true
+pod:
+  replicas:
+    api: 3

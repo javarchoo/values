@@ -1,0 +1,31 @@
+storage: ceph
+pod:
+#  user:
+#    cinder:
+#      uid: 42407
+  replicas:
+    api: 3
+    backup: 1
+    scheduler: 3
+    volume: 1
+conf:
+  ceph:
+    enabled: true
+    admin_keyring: "AQD+3INa1wtjEhAAUFQ1xmhsc7PccAx0r+NGPA=="
+  cinder:
+    DEFAULT:
+      debug: true
+      backup_ceph_user: "jawon.cinderbackup"
+      backup_ceph_pool: "jawon.cinderbackup"
+  backends:
+    rbd1:
+      volume_driver: cinder.volume.drivers.rbd.RBDDriver
+      volume_backend_name: rbd1
+      rbd_ceph_conf: "/etc/ceph/ceph.conf"
+      rbd_flatten_volume_from_snapshot: false
+      rbd_max_clone_depth: 5
+      rbd_store_chunk_size: 4
+      rados_connect_timeout: -1
+      rbd_user: "jawon.cinder"
+      rbd_pool: "jawon.cinder"
+      rbd_secret_uuid: "12345678-9a5c-4a2e-ae0d-86ec18c36afc"

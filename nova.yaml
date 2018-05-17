@@ -1,0 +1,50 @@
+bootstrap:
+  enabled: true
+  flavors:
+    m1_tiny:
+      id: 0c84e220-a258-439f-a6ff-f8e9fd980025
+network:
+  # provide what type of network wiring will be used
+  # possible options: openvswitch, linuxbridge, sriov
+  backend:
+    - linuxbridge
+  novncproxy:
+    node_port:
+      enabled: true
+      port: 30680
+conf:
+  ceph:
+    enabled: true
+    admin_keyring: "AQD+3INa1wtjEhAAUFQ1xmhsc7PccAx0r+NGPA=="
+    cinder:
+      user: "jawon.cinder"
+      keyring: "AQBja9RaaSSNExAAxQYayRTFY1sCas8AuawsWA=="
+      secret_uuid: "12345678-9a5c-4a2e-ae0d-86ec18c36afc"
+  nova:
+    DEFAULT:
+      scheduler_default_filters: "RetryFilter,AvailabilityZoneFilter,RamFilter,ComputeFilter,ComputeCapabilitiesFilter,ImagePropertiesFilter,ServerGroupAntiAffinityFilter,ServerGroupAffinityFilter"
+      debug: true
+#      config_drive_cdrom: false
+#      config_drive_format: "vfat"
+      force_config_drive: true
+    vnc:
+      novncproxy_base_url: http://jj-ctrl01s:30680/vnc_auto.html
+    libvirt:
+      rbd_user: "cinder"
+      rbd_secret_uuid: "12345678-9a5c-4a2e-ae0d-86ec18c36afc"
+    scheduler:
+      discover_hosts_in_cells_interval: 60
+endpoints:
+  oslo_db_cell0:
+    path: /nova_cell0
+pod:
+#  user:
+#    nova:
+#      uid: 42436
+  replicas:
+    api_metadata: 3
+    osapi: 3
+    conductor: 3
+    consoleauth: 3
+    scheduler: 3
+    novncproxy: 3

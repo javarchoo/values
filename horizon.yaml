@@ -1,0 +1,19 @@
+pod:
+  replicas:
+    server: 1
+local_settings:
+  openstack_neutron_network:
+    enable_router: "True"
+    enable_quotas: "True"
+    enable_ipv6: "False"
+    enable_distributed_router: "False"
+    enable_ha_router: "True"
+    enable_lb: "True"
+    enable_firewall: "False"
+    enable_vpn: "False"
+    enable_fip_topology_check: "True"
+network:
+  external_policy_local: false
+  node_port:
+    enabled: true
+    port: 31000

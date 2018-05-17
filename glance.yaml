@@ -1,0 +1,30 @@
+storage: rbd
+pod:
+  replicas:
+    api: 3
+    registry: 3
+#  user:
+#    glance:
+#      uid: 42415
+network:
+  api:
+    ingress:
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: 102400M
+conf:
+  ceph:
+    enabled: true
+    admin_keyring: "AQD+3INa1wtjEhAAUFQ1xmhsc7PccAx0r+NGPA=="
+  glance:
+    glance_store:
+      rbd_store_user: jawon.glance
+      rbd_store_pool: jawon.glance.images
+    DEFAULT:
+      show_image_direct_url: true
+bootstrap:
+  enabled: true
+  structured:
+    images:
+      cirros:
+        id: 88888888-c276-4744-8504-cb974dbb3610
+        private: false

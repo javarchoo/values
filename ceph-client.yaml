@@ -1,0 +1,34 @@
+deployment:
+  ceph: true
+  client_secrets: false
+  rbd_provisioner: false
+  cephfs_provisioner: false
+  rgw_keystone_user_and_endpoints: false
+conf:
+  ceph:
+    global:
+      mon_host: 192.168.48.31
+manifests:
+    configmap_bin: true
+    configmap_bin_ks: true
+    configmap_bin_common: true
+    configmap_etc: true
+    deployment_mds: false
+    deployment_rbd_provisioner: false
+    deployment_cephfs_provisioner: false
+    deployment_rgw: false
+    deployment_mgr: false
+    job_bootstrap: false
+    job_cephfs_client_key: false
+    job_ks_endpoints: false
+    job_ks_service: false
+    job_ks_user: false
+    job_namespace_client_key_cleaner: false
+    job_namespace_client_key: false
+    job_rbd_pool: false
+    secret_keystone_rgw: false
+    secret_keystone: false
+    service_mgr: false
+    service_rgw: false
+    storageclass_cephfs: false
+    storageclass_rbd: false

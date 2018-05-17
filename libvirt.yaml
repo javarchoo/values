@@ -1,0 +1,11 @@
+conf:
+  ceph:
+    enabled: true
+    admin_keyring: "AQD+3INa1wtjEhAAUFQ1xmhsc7PccAx0r+NGPA=="
+    cinder:
+      user: "jawon.cinder"
+      keyring: "AQBja9RaaSSNExAAxQYayRTFY1sCas8AuawsWA=="
+      secret_uuid: "12345678-9a5c-4a2e-ae0d-86ec18c36afc"
+  libvirt:
+    listen_addr: 0.0.0.0
+    log_level: 3
