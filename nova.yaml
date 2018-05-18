@@ -30,7 +30,7 @@ conf:
     vnc:
       novncproxy_base_url: http://jj-ctrl01s:30680/vnc_auto.html
     libvirt:
-      rbd_user: "cinder"
+      rbd_user: "jawon.cinder"
       rbd_secret_uuid: "12345678-9a5c-4a2e-ae0d-86ec18c36afc"
     scheduler:
       discover_hosts_in_cells_interval: 60
